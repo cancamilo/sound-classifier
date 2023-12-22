@@ -1,0 +1,20 @@
+name: tf-metal
+channels:
+  - apple
+  - conda-forge
+dependencies:
+  - python=3.9  ## specify desired version
+  - pip
+  - tensorflow-deps==2.9.0
+
+  ## uncomment for use with Jupyter
+  ## - ipykernel
+
+  ## PyPI packages
+  - pip:
+    - tensorflow-macos==2.9.2
+    - tensorflow-metal==0.5.1  ## optional, but recommended
+    - librosa # check if it works
+    - pandas
+    - tqdm
+    - seaborn
