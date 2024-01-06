@@ -3,13 +3,12 @@
     - Explain technical implementation []
     - Future work []
 - Tune model
-    - Feature engineering [] 
-        - Try different data augmentation techniques
-        - Try different targets
+    - Feature engineering [x] 
+        - Try different data augmentation techniques [x]
     - Modeling []
-        - Try different parameters for the nerual network
-        - Implement cross validation (?) []
-        - Show usage of tensor board []
+        - Try different parameters for the nerual network [x]
+        - Implement cross validation [x]
+        - Show usage of tensor board [x]
 
 - Develop web service []
     - Implement scripts with routes, entry point, pre and post processing included []
