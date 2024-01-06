@@ -1,4 +1,4 @@
-name: tf-metal
+name: tf-metal-2
 channels:
   - apple
   - conda-forge
@@ -6,6 +6,11 @@ dependencies:
   - python=3.9  ## specify desired version
   - pip
   - tensorflow-deps==2.9.0
+  - pandas
+  - jupyter
+  - librosa # check if it works
+  - tqdm
+  - seaborn
 
   ## uncomment for use with Jupyter
   ## - ipykernel
@@ -14,7 +19,4 @@ dependencies:
   - pip:
     - tensorflow-macos==2.9.2
     - tensorflow-metal==0.5.1  ## optional, but recommended
-    - librosa # check if it works
-    - pandas
-    - tqdm
-    - seaborn
+    - streamlit
