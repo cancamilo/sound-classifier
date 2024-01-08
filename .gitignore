@@ -4,3 +4,4 @@
 .metals
 /logs
 /cpkt
+*/__pycache__
