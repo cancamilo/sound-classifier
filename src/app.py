@@ -50,7 +50,6 @@ def main():
 
         if st.button('Classify'):
             model = TFLiteModel()
-            model.load_model()
             with st.spinner("Classifying the sound"):
                 sound_class = model.predict(file)
                 st.success("Classification completed")
