@@ -10,6 +10,7 @@ packages = [{include = "sound_classifier"}]
 python = "~3.10"
 pandas = "^2.1.4"
 librosa = "^0.10.1"
+streamlit = "^1.30.0"
 
 
 [build-system]
