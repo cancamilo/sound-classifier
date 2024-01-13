@@ -1,7 +1,7 @@
 import numpy as np
 import librosa
-# import tensorflow.lite as tflite
-import tflite_runtime.interpreter as tflite
+import tensorflow.lite as tflite
+# import tflite_runtime.interpreter as tflite
 
 
 DATA_PATH = "data/samples/" # path to folder containing audio files
@@ -29,10 +29,9 @@ class TFLiteModel:
         self.input_index = self.interpreter.get_input_details()[0]['index']
         self.output_index = self.interpreter.get_output_details()[0]['index']
 
-    def preprocess(self, audio_file_path):
+    def preprocess(self, audio_signal, sr):
         X = []
-        signal, sr = librosa.load(DATA_PATH+audio_file_path)
-        mfcc_ = librosa.feature.mfcc(y=signal, sr=sr, n_mfcc=13)
+        mfcc_ = librosa.feature.mfcc(y=audio_signal, sr=sr, n_mfcc=13)
         X.append(mfcc_)
         return X
     
@@ -41,8 +40,8 @@ class TFLiteModel:
         X = X.reshape(X.shape[0], X.shape[1], X.shape[2], 1)
         return X
 
-    def predict(self, audio_file_path):
-        X = self.preprocess(audio_file_path)
+    def predict(self, audio_signal, sr):
+        X = self.preprocess(audio_signal, sr)
         X = self.feature_to_tf(X)
 
         self.interpreter.set_tensor(self.input_index, X)
