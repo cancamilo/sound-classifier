@@ -1,7 +1,7 @@
 import numpy as np
 import librosa
-import tensorflow.lite as tflite
-# import tflite_runtime.interpreter as tflite
+# import tensorflow.lite as tflite
+import tflite_runtime.interpreter as tflite
 
 
 DATA_PATH = "data/samples/" # path to folder containing audio files
