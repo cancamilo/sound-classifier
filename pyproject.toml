@@ -7,14 +7,10 @@ readme = "README.md"
 packages = [{include = "sound_classifier"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-librosa = "^0.10.1"
+python = "~3.10"
 pandas = "^2.1.4"
-streamlit = "^1.29.0"
+librosa = "^0.10.1"
 
-
-[tool.poetry.group.dev.dependencies]
-keras-image-helper = "^0.0.1"
 
 [build-system]
 requires = ["poetry-core"]

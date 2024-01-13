@@ -1,14 +1,17 @@
-FROM python:3.10-slim AS python-base
+FROM python:3.10-slim AS pbase
 
 WORKDIR /app
-
-# Copy the current directory contents into the container at /app
-COPY src /app/src
-COPY model /app/model
 
 # Install any needed packages specified in requirements.txt
 COPY requirements.txt /app
 RUN pip install --no-cache-dir -r /app/requirements.txt
+RUN pip install --extra-index-url https://google-coral.github.io/py-repo/ tflite_runtime
+
+COPY src ./src
+COPY model ./model
+COPY data/samples ./data/samples
+
+
 
 # Make port 8501 available to the world outside this container
 EXPOSE 8501

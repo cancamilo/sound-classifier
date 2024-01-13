@@ -1,0 +1,44 @@
+# First stage: build the application
+FROM tensorflow/build:2.11-python3.10 as tf-builder
+
+ENV POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_IN_PROJECT=1 \
+    POETRY_VIRTUALENVS_CREATE=1 \
+    POETRY_CACHE_DIR=/tmp/poetry_cache
+
+FROM tf-builder AS builder-base
+RUN buildDeps="build-essential" \
+    && apt-get update \
+    && apt-get install --no-install-recommends -y \
+        curl \
+        gcc \
+        libsasl2-dev \
+        $buildDeps \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install poetry==1.4.2
+
+WORKDIR /app
+
+COPY pyproject.toml poetry.lock ./
+RUN touch README.md
+
+RUN poetry install --without dev --no-root && rm -rf $POETRY_CACHE_DIR
+
+# Runtime image
+FROM tf-builder as tf-runner
+
+ENV VIRTUAL_ENV=/app/.venv \
+    PATH="/app/.venv/bin:$PATH"
+
+COPY --from=builder-base ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+
+WORKDIR /app
+
+COPY src ./src
+COPY model ./model
+COPY data/samples ./data/samples
+
+EXPOSE 8501
+
+CMD ["bash"]
