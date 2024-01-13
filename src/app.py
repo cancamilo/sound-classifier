@@ -1,7 +1,6 @@
 import os
 import streamlit as st
-from model import TFLiteModel
-import streamlit as st
+from lite_model import TFLiteModel
 
 # TODO: move constants to settings file
 # Constants
