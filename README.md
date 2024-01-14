@@ -1,8 +1,22 @@
 # Sound classification with machine learning
 
+This project showcases the usage of machine learning applied to the problem of sound classification. 
 
+Sound classification has a wide range of practical applications across various domains. For example, classification of environmental noise such as traffic noise, construction sounds, or wildlife sounds helps in assessing the impact on urban planning, public health, or wildlife conservation. Also in industrial settings it could help identify malfunctioning machinery or potential safety hazzards. These are only a couple of use cases among thousands that highlight the relevance and versatility of automated sound classification.
 
-## Data
+This demonstration makes use of a [kaggle dataset](https://www.kaggle.com/datasets/mmoreaux/environmental-sound-classification-50) containing 50 different sound classes from which only 10 classes are selected for simplicity. 
+
+The selected dataset is used to train a convolutional neural network that classifies audio signals into one out of 10 categories. Since the amount of data is limited to only 40 samples per class, this project makes use of data augmentation tecniques in order to have a more robust model. 
+
+For demonstration purposes, the model is then put into a simple streamlit application and depoyed to the cloud to enable easy interaction with end users.
+
+Project outline:
+
+- [Data description](#data-description)
+- [Environment setup](#environment-setup)
+- [Exploring the data](#exploring-the-data)
+
+## Data Description
 
 The sound data is obtained from [this kaggle dataset](https://www.kaggle.com/datasets/mmoreaux/environmental-sound-classification-50)
 
@@ -29,19 +43,22 @@ The data contains 40 different sound classes, but for the purpose of this projec
     'cat': 9
  }
 ```
+
 ## Environment setup
 
-### Tensorflow installation on mac
+In order to run the notebooks and scripts provied in this repositoy, you should download [this kaggle dataset](https://www.kaggle.com/datasets/mmoreaux/environmental-sound-classification-50) and save it to the folder **data** in the root of this repository.
 
-https://stackoverflow.com/questions/72964800/what-is-the-proper-way-to-install-tensorflow-on-apple-m1-in-2022
+For managing the python dependencies and virtual environments I chose conda. The provided [project-dependencies.yml file](project-dependencies.yml) contains the neccesary dependencies to run the notebooks. However note that currently this setting was tried only on Macbook Pro with an M2 chip. If you want to run this in a different system, the tensorflow dependencies have to be changed. As for the rest of the dependencies they can stay the same. The environment can be created as:
 
-## Notebook implementation
+```console
+conda env create -f project-dependencies.yml
+```
 
-## Model training
+Once it is created it can be activated with ```conda activate tf-metal-2```
 
-## Running the service
+Also, make sure that you have Docker setup in your system and the aws-cli if you want to deploy the service to the cloud.
 
-## Deploying to AWS Elastic Beanstalk
+References: https://stackoverflow.com/questions/72964800/what-is-the-proper-way-to-install-tensorflow-on-apple-m1-in-2022
 
 ### Configure Linux instance on AWS
 
@@ -77,6 +94,14 @@ to enable executing docker without sudo:
 `sudo usermod -aG docker $USER`
 
 logout and ssh to the server again and it should work.
+
+## Exploring the data
+
+## Model training
+
+## Running the service
+
+## Deploying to AWS Elastic Beanstalk
 
 
 
