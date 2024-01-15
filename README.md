@@ -96,9 +96,11 @@ The previously described environment configuration is used for developemnt purpo
 
     and modify the file as follows:
 
+    ```
     export PATH="${HOME}/soft:{PATH}"
+    ```
 
-    execute `source .bashrc` and check `which docker-compose`\
+    execute `source .bashrc` and check `which docker-compose`
 
     to enable executing docker without sudo:
 
@@ -110,17 +112,17 @@ The previously described environment configuration is used for developemnt purpo
 
 - Run the service
 
-First of all this repository should be cloned to the linux virtual machine. Given that the previous installation was done succesfully, we can build the docker image and run the container
+    First of all this repository should be cloned to the linux virtual machine. Given that the previous installation was done succesfully, we can build the docker image and run the container
 
-```console
-docker build -t sound-img . 
-```
+    ```console
+    docker build -t sound-img . 
+    ```
 
-```console
-docker run -d -p 8501:8501 sound-img
-```
+    ```console
+    docker run -d -p 8501:8501 sound-img
+    ```
 
-With this, the service should be accesible on the 8501 port. Note that you can set port forwarding on your local machine to make the service accesible from your browser.
+    With this, the service should be accesible on the 8501 port. Note that you can set port forwarding on your local machine to make the service accesible from your browser.
 
 ## Data exploration and model training
 
@@ -154,6 +156,28 @@ streamlit run src/app.py
 
 ## Deploying to AWS Elastic Beanstalk
 
+Make sure you have an aws account configured in your system to access aws cloud resources programmatically.
+Check the [aws official documentation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-prereqs.html) to learn more about this.
+
+Initialize the project
+
+```console
+eb init -p docker --profile {your_aws_profile} -r {aws_region} star-model-serving
+```
+
+Deploy to aws with:
+
+```console
+make aws-deploy
+```
+
+It can take up a few minutes until the neccesary resources are create and initialized. When it is done, the console output will provide an url where the service is available.
+
+Finally, clean up all the resources to avoid undesired aws costs:
+
+```console
+make aws-delete-env
+```
 
 
 

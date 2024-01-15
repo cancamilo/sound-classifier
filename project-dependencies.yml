@@ -20,3 +20,4 @@ dependencies:
     - tensorflow-macos==2.9.2
     - tensorflow-metal==0.5.1  ## optional, but recommended
     - streamlit
+    - awsebcli==3.20.10
