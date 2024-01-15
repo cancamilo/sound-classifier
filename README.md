@@ -110,7 +110,7 @@ The previously described environment configuration is used for developemnt purpo
 
 - Run the service
 
-First of all this repository should be clone to the linux virtual machine. Given that the previous installation was done succesfully, we can build the docker image and run the container
+First of all this repository should be cloned to the linux virtual machine. Given that the previous installation was done succesfully, we can build the docker image and run the container
 
 ```console
 docker build -t sound-img . 
@@ -122,13 +122,35 @@ docker run -d -p 8501:8501 sound-img
 
 With this, the service should be accesible on the 8501 port. Note that you can set port forwarding on your local machine to make the service accesible from your browser.
 
-## Exploring the data
+## Data exploration and model training
 
+The [main notebook](./sound-data-exploration.ipynb) contains the code to read the data, preprocess it and train a model for sound classification. Each of the steps is explained in more detail inside the notebook.
 
+It can be run using the conda environment created in the previous steps.
 
-## Model training
+## Demo Web application
 
-## Running the service
+First of all clone this repository. With docker installed in your system, you can build and run the image to launch the web service and try the sound classification model.
+
+```console
+docker build -t sound-img . 
+```
+
+```console
+docker run -d -p 8501:8501 sound-img
+```
+
+Alternatively, if you want to run the service locally, just recreate the conda environment as:
+
+```console
+conda env create -f project-dependencies.yml
+```
+
+and activate it with ```conda activate tf-metal-2```. Then the streamlit application can be run:
+
+```console
+streamlit run src/app.py
+```
 
 ## Deploying to AWS Elastic Beanstalk
 
