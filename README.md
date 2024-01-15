@@ -48,7 +48,7 @@ The data contains 40 different sound classes, but for the purpose of this projec
 
 In order to run the notebooks and scripts provied in this repositoy, you should download [this kaggle dataset](https://www.kaggle.com/datasets/mmoreaux/environmental-sound-classification-50) and save it to the folder **data** in the root of this repository.
 
-For managing the python dependencies and virtual environments I chose conda. The provided [project-dependencies.yml file](project-dependencies.yml) contains the neccesary dependencies to run the notebooks. However note that currently this setting was tried only on Macbook Pro with an M2 chip. If you want to run this in a different system, the tensorflow dependencies have to be changed. As for the rest of the dependencies they can stay the same. The environment can be created as:
+For managing the python dependencies and virtual environments I chose conda. The provided [project-dependencies.yml file](project-dependencies.yml) contains the neccesary dependencies to run the notebooks. However note that currently this setting was tried only on Macbook Pro with an M2 chip. If you want to run this in a different system, the tensorflow dependencies have to be changed. As for the rest of the dependencies they can stay the same. With the correct tensorflow dependencies,  the environment can be created as:
 
 ```console
 conda env create -f project-dependencies.yml
@@ -62,40 +62,69 @@ References: https://stackoverflow.com/questions/72964800/what-is-the-proper-way-
 
 ### Configure Linux instance on AWS
 
-- Install anaconda 
+The previously described environment configuration is used for developemnt purpose. If all you want is to run the streamlit app on a linux virtual machine these are the steps to follow: 
 
-`wget https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh`
+- Create an aws EC2 instance as instructed in [this video](https://www.youtube.com/watch?v=IXSiYkP23zo&ab_channel=DataTalksClub%E2%AC%9B)
 
-accept terms and condition, accept defaults
+- Once the connection to the instance is established we can can install the neccesary packages.
 
-- Install docker
+    - Install conda
+    ```console
+    wget https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh
+    ```
+    accept terms and condition, accept defaults
 
-`sudo apt update`
-`sudo apt install docker.io
+    - Install docker
 
-- Install docker compose
+    ```console
+    sudo apt update
+    sudo apt install docker.io
+    ```
 
-`wget https://github.com/docker/compose/releases/download/v2.24.0/docker-compose-linux-x86_64 -O docker-compose`
+    - Install docker compose
 
-go to their github to find recent versions
+    ```console
+    wget https://github.com/docker/compose/releases/download/v2.24.0/docker-compose-linux-x86_64 -O docker-compose
+    ```
+    check docker compose github to find recent versions.
 
-Also modify the path:
+    - Modify the path:
 
-nanon .bashrc
+    ```console
+    nanon .bashrc
+    ```
 
-and write  in that file:
+    and modify the file as follows:
 
-export PATH="${HOME}/soft:{PATH}"
+    export PATH="${HOME}/soft:{PATH}"
 
-execute `source .bashrc` and check `which docker-compose`\
+    execute `source .bashrc` and check `which docker-compose`\
 
-to enable executing docker without sudo:
+    to enable executing docker without sudo:
 
-`sudo usermod -aG docker $USER`
+    ```console
+    sudo usermod -aG docker $USER
+    ```
 
-logout and ssh to the server again and it should work.
+    logout and ssh to the server again and it should work.
+
+- Run the service
+
+First of all this repository should be clone to the linux virtual machine. Given that the previous installation was done succesfully, we can build the docker image and run the container
+
+```console
+docker build -t sound-img . 
+```
+
+```console
+docker run -d -p 8501:8501 sound-img
+```
+
+With this, the service should be accesible on the 8501 port. Note that you can set port forwarding on your local machine to make the service accesible from your browser.
 
 ## Exploring the data
+
+
 
 ## Model training
 
