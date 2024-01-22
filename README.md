@@ -154,7 +154,7 @@ make run-training
 
 In this clip you can observe a short video of how the demo application works:
 
-<video witdh=320 height=400 src="data/demo_video.mp4" controls title="Title"></video>
+<img src="data/demo_video.gif" width="400" height="500" />
 
 First of all clone this repository. With docker installed in your system, you can build and run the image to launch the web service and try the sound classification model.
 
