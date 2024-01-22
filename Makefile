@@ -8,6 +8,10 @@ init-env:
 run-training: 
 	@python model_training.py
 
+.PHONY: run-service
+run-service:
+	@streamlit run src/app.py
+
 .PHONY: aws-login
 aws-login:
 	@aws sso login --sso-session ${profile}

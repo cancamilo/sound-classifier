@@ -15,6 +15,8 @@ Project outline:
 - [Data description](#data-description)
 - [Environment setup](#environment-setup)
 - [Exploring the data](#exploring-the-data)
+- [Demo web application](#demo-web-application)
+- [Deploying to aws](#deploying-to-aws-elastic-beanstalk)
 
 ## Data Description
 
@@ -55,6 +57,18 @@ conda env create -f project-dependencies.yml
 ```
 
 Once it is created it can be activated with ```conda activate tf-metal-2```
+
+In addition to the already installed dependencies, you should install tflite_runtime like:
+
+```console
+pip install --extra-index-url https://google-coral.github.io/py-repo/ tflite_runtime
+```
+
+If you want to try out the service locally, run:
+
+```console
+streamlit streamlit run src/app.py
+```
 
 Also, make sure that you have Docker setup in your system and the aws-cli if you want to deploy the service to the cloud.
 
@@ -130,7 +144,17 @@ The [main notebook](./sound-data-exploration.ipynb) contains the code to read th
 
 It can be run using the conda environment created in the previous steps.
 
+In order to train the model and save it, it can be done by first activating the conda environment and then executing the training script:
+
+```console
+make run-training
+```
+
 ## Demo Web application
+
+In this clip you can observe a short video of how the demo application works:
+
+<video witdh=320 height=400 src="data/demo_video.mp4" controls title="Title"></video>
 
 First of all clone this repository. With docker installed in your system, you can build and run the image to launch the web service and try the sound classification model.
 

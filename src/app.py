@@ -2,8 +2,9 @@ import os
 import io
 import streamlit as st
 import librosa
+import numpy as np
+import matplotlib.pyplot as plt
 from lite_model import TFLiteModel
-
 
 DATA_PATH = "data/samples/" # path to folder containing audio files
 
@@ -44,6 +45,29 @@ def main():
         except:
             st.write("Please record sound first")
 
+        # Add a placeholder
+        if st.button('Display Spectrogram'):
+            st.write("spectrogram")
+
+            mel_spec = librosa.feature.melspectrogram(y=audio_signal , sr=sample_rate ,  n_fft=2048, hop_length=512)
+            mel_spec = librosa.power_to_db(mel_spec, ref=np.max)  #visualizing mel_spectrogram directly gives black image. So, coverting from power_to_db is required
+
+            # Create a new figure and set its size
+            plt.figure(figsize=(10, 4))
+
+            # Display the mel_spec array as an image with a colormap
+            plt.imshow(mel_spec, aspect='auto', cmap='inferno')
+
+            # Remove the axes for a cleaner look
+            plt.axis('off')
+
+            # Save the figure to a BytesIO object
+            buf = io.BytesIO()
+            plt.savefig(buf, format='png')
+            buf.seek(0)
+
+            st.image(buf, caption='Mel Spectrogram', use_column_width=True)
+
         if st.button('Classify'):
             model = TFLiteModel()
             with st.spinner("Classifying the sound"):
@@ -51,16 +75,7 @@ def main():
                 st.success("Classification completed")
 
             st.write("### The sound is ", sound_class)
-
-
-        # Add a placeholder
-        if st.button('Display Spectrogram'):
-            st.write("spectrogram")
-            # if os.path.exists(WAVE_OUTPUT_FILE):
-            #     spectrogram, format = get_spectrogram(type='mel')
-            #     display(spectrogram, format)
-            # else:
-            #     st.write("Please record sound first")
+        
 
 if __name__ == '__main__':
     main()
