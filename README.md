@@ -24,10 +24,10 @@ The sound data is obtained from [this kaggle dataset](https://www.kaggle.com/dat
 
 The data contains a csv file with the following fields:
 
-filename: reference to the .wav file. type:  object
-fold: fold number. type:  int64 
-category: label representing the type of sound. type:  object
-src_file: file number. type:  int64 
+    - filename: reference to the .wav file. type:  object
+    - fold: fold number. type:  int64 
+    - category: label representing the type of sound. type:  object
+    - src_file: file number. type:  int64 
 
 The data contains 40 different sound classes, but for the purpose of this project only the following 10 are selected:
 
@@ -50,7 +50,7 @@ The data contains 40 different sound classes, but for the purpose of this projec
 
 In order to run the notebooks and scripts provied in this repositoy, you should download [this kaggle dataset](https://www.kaggle.com/datasets/mmoreaux/environmental-sound-classification-50) and save it to the folder **data** in the root of this repository.
 
-For managing the python dependencies and virtual environments I chose conda. The provided [project-dependencies.yml file](project-dependencies.yml) contains the neccesary dependencies to run the notebooks. However note that currently this setting was tried only on Macbook Pro with an M2 chip. If you want to run this in a different system, the tensorflow dependencies have to be changed. As for the rest of the dependencies they can stay the same. With the correct tensorflow dependencies,  the environment can be created as:
+For managing the python dependencies and virtual environments I chose conda. The provided [project-dependencies.yml file](project-dependencies.yml) contains the neccesary dependencies to run the notebooks. However note that currently this setting was tried only on Macbook Pro with an M2 chip. If you want to run this in a different system, the tensorflow dependencies have to be changed to match your computer specific hardware. As for the rest of the dependencies they can stay the same. With the correct tensorflow dependencies,  the environment can be created as:
 
 ```console
 conda env create -f project-dependencies.yml
@@ -67,7 +67,7 @@ pip install --extra-index-url https://google-coral.github.io/py-repo/ tflite_run
 If you want to try out the service locally, run:
 
 ```console
-streamlit streamlit run src/app.py
+streamlit run src/app.py
 ```
 
 Also, make sure that you have Docker setup in your system and the aws-cli if you want to deploy the service to the cloud.
@@ -152,11 +152,11 @@ make run-training
 
 ## Demo Web application
 
-In this clip you can observe a short video of how the demo application works:
+Here you can observe a short video of how the demo application works:
 
 <img src="data/demo_video.gif" width="400" height="500" />
 
-First of all clone this repository. With docker installed in your system, you can build and run the image to launch the web service and try the sound classification model.
+To run this application, first of all clone this repository. With docker installed in your system, you can build and run the image to launch the web service and try the sound classification model.
 
 ```console
 docker build -t sound-img . 
